@@ -12,13 +12,9 @@
         <form method="POST">
 
             {% csrf_token %}
-
-            <label for="id_name">Name:</label><br>
-            <input type="text" id="id_name" name="name" /><br>
-            <br>
-            <label for="id_done">Done:</label><br>
-            <input type="checkbox" id="id_done" name="done" /><br>
-            <br>
+            <!--injecting form into page using template tags-->
+            <!--.as_p renders form in block level elements in paragraphs. As 'blank' = false, fields must be filled in, otherwise can't be saved-->
+            {{ form.as_p }}
             <button type="submit">Save</button>
         </form>
     </body>
