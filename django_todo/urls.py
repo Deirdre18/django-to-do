@@ -14,8 +14,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from todo.views import get_todo_list
-from todo.views import get_todo_list, create_an_item, edit_an_item
+from todo.views import get_todo_list, create_an_item, edit_an_item, toggle_status
 
 
 urlpatterns = [
@@ -23,6 +22,7 @@ urlpatterns = [
     url(r'^$', get_todo_list),
     url(r'^add$', create_an_item),
     #creating a regular expression which can pass through any value.Passing through an id expression to pass through digit
-    url(r'^edit/(?P<id>\d+)$', edit_an_item)
+    url(r'^edit/(?P<id>\d+)$', edit_an_item),
+    url(r'^toggle/(?P<id>\d+)$', toggle_status)
 
 ]

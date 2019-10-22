@@ -13,7 +13,7 @@ def create_an_item(request):
     if request.method == "POST":
         #creating new form and inside constructor of form, populating with values from POST request item
         form = ItemForm(request.POST, request.FILES)
-        #django will do automatic check that form is valid
+        #django will do automatic check that form is valid. Server side form validation
         if form.is_valid():
             #form automatically knows form is valid and where to be saved, becaused of adding meta class
             form.save()
@@ -37,3 +37,9 @@ def edit_an_item(request, id):
     else:
         form = ItemForm(instance=item)
     return render(request, "item_form.html", {'form': form})
+
+def toggle_status(request, id):
+    item = get_object_or_404(Item, pk=id)
+    item.done = not item.done
+    item.save()
+    return redirect(get_todo_list)
