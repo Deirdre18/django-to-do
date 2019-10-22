@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Item
 from .forms import ItemForm
 
@@ -21,4 +21,19 @@ def create_an_item(request):
     else:
         form = ItemForm()
 
+    return render(request, "item_form.html", {'form': form})
+
+#creating new instance of item. Want to get object from the item table, specifically primary key
+def edit_an_item(request, id):
+
+    item = get_object_or_404(Item, pk=id)
+
+    if request.method == "POST":
+
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect(get_todo_list)
+    else:
+        form = ItemForm(instance=item)
     return render(request, "item_form.html", {'form': form})
