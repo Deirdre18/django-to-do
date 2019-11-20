@@ -16,7 +16,9 @@ class TestToDoItemForm(TestCase):
     # no longer using 'def test_is_this_thing_on(self):'
 
     # testing can create item with just a name
-    def test_can_create_item_with_just_a_name(self):
+    def test_can_create_an_item_with_just_a_name(self):
+        form = ItemForm({'name': 'Create Tests'})
+        self.assertTrue(form.is_valid())
 
         # can instantiate this object using a dictionary so we will open our curly braces for a dictionary and the key is going to be name and then the value is going to be a string that we wish to give it so we'll give this a key of name we'll give it a value of create tests
         # no longer using 'form = ItemForm({'name': 'Create Tests'})'
@@ -31,8 +33,8 @@ class TestToDoItemForm(TestCase):
 
         # another method now that will test to ensure that the form validate the item cannot be created if we don't create a name and we'll assert that we get the correct message
 
-        def test_correct_message_for_missing_name(self):
-            form = ItemForm({'form': ''})
-            self.assertFalse(form.is_valid())
+    def test_correct_message_for_missing_name(self):
+        form = ItemForm({'form': ''})
+        self.assertFalse(form.is_valid())
         # there is an error in the name and we want to assert that the value that the error gives back is a string that says this field is required with a full stop at the end. Full stop at the end because otherwise our test will fail, as it looks for an exact match and this field is required as a standard piece of text that Django will get back when form validation fails
-            self.assertEqual(form.errors['name'], [u'This field is required.'])
+        self.assertEqual(form.errors['name'], [u'This field is required.'])
