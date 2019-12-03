@@ -31,3 +31,16 @@ class TestItemModel(TestCase):
         self.assertEqual(item.name, "Create a test")
         self.assertTrue(item.done)
         # self.assertEqual(item.done,True)
+
+    def test_can_create_an_item_with_a_name_and_status(self):
+        # running 2 arguments, to test when done=True
+        item = Item(name="Create a test", done=True)
+        item.save()
+        self.assertEqual(item.name, "Create a test")
+        self.assertTrue(item.done)
+        # self.assertEqual(item.done,True)
+
+    def test_item_as_a_string(self):
+        # creating test which is equal to item as a string
+        item = Item(name="Create a test")
+        self.assertEqual("Create a test", str(item))
