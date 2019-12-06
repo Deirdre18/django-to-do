@@ -24,7 +24,7 @@ SECRET_KEY = '6x8bey2jo*+xu*x=5sxd6l#4j-(d&+sx%p0p@(8b@agm%*vs+2'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
-                 'https://test-django-todo.herokuapp.com/'']
+                 'test-django-todo.herokuapp.com']
 
 
 # Application definition
