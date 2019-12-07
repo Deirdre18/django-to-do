@@ -10,6 +10,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import dj_database_url
 
+if os.environ.get('DEVELOPMENT'):
+    development = True
+else:
+    development = False
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,7 +27,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6x8bey2jo*+xu*x=5sxd6l#4j-(d&+sx%p0p@(8b@agm%*vs+2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = development
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
                  'test-django-todo.herokuapp.com']
@@ -71,16 +78,28 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+if development:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {'default': dj_database_url.parse(
+        os.environ.get('DATABASE_URL'))}
 
-# DATABASES = {
-# 'default': {
-#    'ENGINE': 'django.db.backends.sqlite3',
-#    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-# }
-# }
 
-DATABASES = {'default': dj_database_url.parse("postgres://sbyljfaiwurdwq:ca711e982cc51ee4dcaef5488f4ca430cb88b57287148303a42407d7f520b763@ec2-54-247-171-30.eu-west-1.compute.amazonaws.com:5432/d3cspi610igrc2"),
-             }
+# if development:
+#    DATABASES = {
+    #    'default': {
+    #        'ENGINE': 'django.db.backends.sqlite3',
+    #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #    }
+#    }
+# else:
+    # DATABASES = {'default': dj_database_url.parse("postgres://sbyljfaiwurdwq:ca711e982cc51ee4dcaef5488f4ca430cb88b57287148303a42407d7f520b763@ec2-54-247-171-30.eu-west-1.compute.amazonaws.com:5432/d3cspi610igrc2"),
+    # }
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
