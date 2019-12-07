@@ -26,7 +26,7 @@ DEBUG = True
 ALLOWED_HOSTS =  # ['127.0.0.1', 'localhost',
 # 'test-django-todo.herokuapp.com']
 [os.environ.get('127.0.0.1,', 'localhost')
- os.environ.get('localhost')]
+ os.environ.get('127.0.0.1,', 'localhost')]
 
 # Application definition
 
